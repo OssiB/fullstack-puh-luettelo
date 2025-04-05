@@ -1,0 +1,33 @@
+# Root level
+.env
+.DS_Store
+*.log
+
+# Node modules (both client and server)
+client/node_modules/
+server/node_modules/
+
+# Vite build output
+client/dist/
+
+# Local environment and editor settings
+.vscode/
+*.local
+
+# npm/yarn/pnpm lockfiles (optional, if you use one tool consistently)
+# Uncomment the one(s) you don’t use:
+package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Mac OS and system junk
+Thumbs.db
+ehthumbs.db
+*.swp
+client/node_modules/
+server/node_modules/
