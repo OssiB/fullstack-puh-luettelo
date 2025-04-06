@@ -80,7 +80,7 @@ let phoneNumbers= [
   app.post('/api/persons', (request, response) => {
     const body = request.body
   
-    if (!body.name) {
+    if (!body.name || !body.number) {
       return response.status(400).json({ 
         error: 'content missing' 
       })
@@ -101,6 +101,7 @@ let phoneNumbers= [
     response.json(person) 
   })
 
-const PORT = 3001
-app.listen(PORT)
-console.log(`Server running on port ${PORT}`)
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
