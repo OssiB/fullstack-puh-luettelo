@@ -75,6 +75,12 @@ const App = () => {
         notifyWith(`Added ${createdPerson.name}`)
         clearForm()
       })
+      .catch((error) => {
+        notifyWith(
+          `Error: ${error.response.data.error}`,
+          true
+        )
+      })
   }
 
   const onRemove = (person) => {
