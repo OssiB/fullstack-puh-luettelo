@@ -83,10 +83,10 @@ app.post('/api/persons', (request, response, next) => {
     })
   }
   const existingPerson = Person.findOne({name: body.name })
-
+  console.log(existingPerson)
   if (existingPerson) {
     // Name already exists, update the number
-    existingPerson.number = number
+    existingPerson.number = body.number
     const updatedPerson = existingPerson.save().then((updatedPerson) => {
       return response.json(updatedPerson)
     }
