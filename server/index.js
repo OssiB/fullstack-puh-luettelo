@@ -82,7 +82,7 @@ app.post('/api/persons', (request, response, next) => {
       error: 'content missing'
     })
   }
-  const existingPerson = Person.findOne({ name })
+  const existingPerson = Person.findOne({name: body.name })
 
   if (existingPerson) {
     // Name already exists, update the number
