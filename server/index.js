@@ -82,25 +82,21 @@ app.post('/api/persons', (request, response, next) => {
       error: 'content missing'
     })
   }
-  const existingPerson = Person.findOne({name: body.name })
-  console.log(existingPerson)
-  if (existingPerson) {
-    // Name already exists, update the number
-    existingPerson.number = body.number
-    const updatedPerson = existingPerson.save().then((updatedPerson) => {
-      return response.json(updatedPerson)
-    }
-    )
-  }
-  const person = new Person({
-    name: body.name,
-    number: body.number,
-  })
 
-  person.save().then((savedPerson) => {
-    response.json(savedPerson)
-  })
-    .catch((error) => next(error))
+  Person.findOne({ name: body.name }).then(existingPerson => {
+    if (existingPerson) {
+      console.log((existingPerson))
+      existingPerson.number = body.number
+      return existingPerson.save().then(updatedPerson => {
+        response.json(updatedPerson)
+      })
+    } else {
+      const newPerson = new Person({ name: body.name, number: body.number })
+      return newPerson.save().then(savedPerson => {
+        response.status(201).json(savedPerson)
+      })
+    }
+  }).catch(error => next(error))
 })
 app.put('/api/persons/:id', (request, response, next) => {
   const { name, number } = request.body
